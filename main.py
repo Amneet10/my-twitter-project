@@ -5,6 +5,8 @@ import nltk
 import os
 from dotenv import load_dotenv
 import textblob
+import matplotlib.pyplot as plt
+import numpy as np
 
 load_dotenv()
 
@@ -41,23 +43,32 @@ def getTextSentiment(text):
     return analysis.sentiment.polarity
 
 
-    
+positive = 0
+negative = 0
+neutral = 0
 
 for i in result_dict['data']:
 
     cleanedText = cleaningData(i['text'])
     cleanedText = removeStopWords(cleanedText)
     p = getTextSentiment(cleanedText)
+   
     if p>0:
         print(f"POS--------{cleanedText}")
+        positive +=1
+
     elif p==0:
         print(f"NEUTRAL--------{cleanedText}")
+        neutral +=1
     else:
         print(f"NEGATIVE--------{cleanedText}")
+        negative +=1
     
 
 
-
-
+y = np.array([positive,negative,neutral])
+mylabels =["positive","negative","neutral"]
+plt.pie(y, labels = mylabels,autopct='%1.1f%%')
+plt.show() 
 
 

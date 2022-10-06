@@ -9,6 +9,8 @@ nltk = "*"
 python-dotenv = "*"
 transformers = "*"
 textblob = "*"
+matplotlib = "*"
+numpy = "*"
 
 [dev-packages]
 
