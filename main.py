@@ -4,6 +4,7 @@ import re
 import nltk
 import os
 from dotenv import load_dotenv
+import textblob
 
 load_dotenv()
 
@@ -35,12 +36,24 @@ def removeStopWords(dataToBeCleaned):
     setOfWords = set(stopwords.words('english'))
     return ' '.join([i for i in dataToBeCleaned.split() if i not in setOfWords])
 
+def getTextSentiment(text):
+    analysis = textblob.TextBlob(text)
+    return analysis.sentiment.polarity
+
+
+    
+
 for i in result_dict['data']:
-    print(i['text'])
-    print("--------------------------------")
+
     cleanedText = cleaningData(i['text'])
     cleanedText = removeStopWords(cleanedText)
-    print(cleanedText)
+    p = getTextSentiment(cleanedText)
+    if p>0:
+        print(f"POS--------{cleanedText}")
+    elif p==0:
+        print(f"NEUTRAL--------{cleanedText}")
+    else:
+        print(f"NEGATIVE--------{cleanedText}")
     
 
 

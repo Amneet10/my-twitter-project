@@ -7,6 +7,8 @@ name = "pypi"
 requests = "*"
 nltk = "*"
 python-dotenv = "*"
+transformers = "*"
+textblob = "*"
 
 [dev-packages]
 
